@@ -8,5 +8,7 @@ abstract class Bloc<T> {
     _outputState.sink.add(event);
   }
 
-  void dispose();
+  void dispose() {
+    _outputState.close();
+  }
 }
