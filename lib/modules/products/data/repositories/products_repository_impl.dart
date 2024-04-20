@@ -8,8 +8,14 @@ class ProductsRepositoryImpl implements ProductsRepository {
   final ProductsDatasource datasource;
   const ProductsRepositoryImpl(this.datasource);
   @override
-  Future<Result<BaseError, List<ProductEntity>>> getProducts() {
-    // TODO: implement getProducts
-    throw UnimplementedError();
+  Future<Result<BaseError, List<ProductEntity>>> getProducts() async {
+    try {
+      final result = await datasource.getProducts();
+      return Result(
+        success: result.map((model) => model.toEntity()).toList(),
+      );
+    } on BaseError catch (e) {
+      return Result(failure: e);
+    }
   }
 }

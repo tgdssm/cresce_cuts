@@ -1,3 +1,5 @@
+import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+
 class RatingModel {
   final double rate;
   final int count;
@@ -20,4 +22,6 @@ class RatingModel {
       'count': count,
     };
   }
+
+  RatingEntity toEntity() => RatingEntity(rate: rate, count: count);
 }

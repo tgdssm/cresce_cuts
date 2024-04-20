@@ -1,4 +1,5 @@
 import 'package:vale_vantagens/modules/products/data/models/rating_model.dart';
+import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
 
 class ProductModel {
   final int id;
@@ -42,4 +43,14 @@ class ProductModel {
       'rating': rating.toJson(),
     };
   }
+
+  ProductEntity toEntity() => ProductEntity(
+        id: id,
+        title: title,
+        price: price,
+        description: description,
+        category: category,
+        image: image,
+        rating: rating.toEntity(),
+      );
 }

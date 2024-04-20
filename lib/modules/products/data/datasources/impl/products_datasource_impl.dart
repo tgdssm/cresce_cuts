@@ -14,7 +14,7 @@ class ProductsDatasourceImpl implements ProductsDatasource {
   Future<List<ProductModel>> getProducts() async {
     try {
       final List<ProductModel> products = [];
-      final response = await client.get(ProductsEndPoints.getProducts.url);
+      final response = await client.get(ProductsEndPointApi.getProducts.url);
       for (var product in response.data) {
         products.add(ProductModel.fromJson(product));
       }

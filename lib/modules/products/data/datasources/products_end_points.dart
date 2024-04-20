@@ -1,7 +1,7 @@
-enum ProductsEndPoints {
+enum ProductsEndPointApi {
   getProducts('https://fakestoreapi.com/products');
 
   final String url;
 
-  const ProductsEndPoints(this.url);
+  const ProductsEndPointApi(this.url);
 }
