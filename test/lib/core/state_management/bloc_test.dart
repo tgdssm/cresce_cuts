@@ -2,9 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vale_vantagens/core/state_management/bloc.dart';
 import 'package:vale_vantagens/core/state_management/states/base_state.dart';
 import 'package:vale_vantagens/core/state_management/states/error_state.dart';
+import 'package:vale_vantagens/core/state_management/states/initial_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
 
-class BlocMock extends Bloc<BaseState> {}
+class BlocMock extends Bloc<BaseState> {
+  BlocMock() : super(InitialState());
+}
 
 void main() {
   group('Bloc Tests', () {
@@ -26,6 +29,7 @@ void main() {
         bloc.state,
         emitsInOrder(
           [
+            isA<InitialState>(),
             isA<LoadingState>(),
             isA<ErrorState>(),
           ],

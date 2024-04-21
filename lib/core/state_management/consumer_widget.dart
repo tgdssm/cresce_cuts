@@ -5,10 +5,12 @@ import 'bloc.dart';
 class ConsumerWidget<T> extends StatefulWidget {
   final Bloc<T> bloc;
   final Widget Function(BuildContext context, T? state) builder;
+  final void Function(BuildContext context, T state)? listener;
   const ConsumerWidget({
     super.key,
     required this.bloc,
     required this.builder,
+    this.listener,
   });
 
   @override
@@ -17,19 +19,17 @@ class ConsumerWidget<T> extends StatefulWidget {
 
 class _ConsumerWidgetState<T> extends State<ConsumerWidget<T>> {
   @override
-  void dispose() {
-    widget.bloc.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StreamBuilder<T>(
-      stream: widget.bloc.state,
-      builder: (context, snapshot) => widget.builder(
-        context,
-        snapshot.data,
-      ),
-    );
+        stream: widget.bloc.state,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            widget.listener?.call(context, snapshot.data as T);
+          }
+          return widget.builder(
+            context,
+            snapshot.data,
+          );
+        });
   }
 }

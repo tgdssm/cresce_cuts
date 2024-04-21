@@ -7,7 +7,7 @@ class Result<L, R> {
   bool hasException() => failure != null;
   bool hasSuccess() => success != null;
 
-  void fold<T>(void Function(L e) onException, void Function(R s) onSuccess) {
+  void fold(void Function(L e) onException, void Function(R s) onSuccess) {
     if (hasException()) {
       return onException(failure as L);
     } else if (hasSuccess()) {

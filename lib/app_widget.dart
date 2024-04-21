@@ -9,6 +9,9 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       title: 'Vale Vantagens',
       routerConfig: Modular.routerConfig,
+      theme: ThemeData(
+        fontFamily: 'Rubik',
+      ),
     );
   }
 }

@@ -7,14 +7,15 @@ import 'package:vale_vantagens/modules/products/data/repositories/products_repos
 import 'package:vale_vantagens/modules/products/domain/repositories/products_repository.dart';
 import 'package:vale_vantagens/modules/products/domain/usecases/get_products_usecase.dart';
 import 'package:vale_vantagens/modules/products/domain/usecases/impl/get_products_usecase_impl.dart';
+import 'package:vale_vantagens/modules/products/ui/pages/products_bloc.dart';
+import 'package:vale_vantagens/modules/products/ui/pages/products_page.dart';
 
 class ProductsModule extends Module {
-  static const root = BasePath('/products');
-  static const initial = BasePath('/', root);
+  static const root = BasePath('//');
 
   @override
   void routes(RouteManager r) {
-    // TODO: implement routes
+    r.child(root.path, child: (context) => const ProductsPage());
     super.routes(r);
   }
 
@@ -33,6 +34,11 @@ class ProductsModule extends Module {
     i.add<GetProductsUseCase>(
       () => GetProductsUseCaseImpl(
         i.get<ProductsRepository>(),
+      ),
+    );
+    i.addSingleton<ProductsBloc>(
+      () => ProductsBloc(
+        i.get<GetProductsUseCase>(),
       ),
     );
     super.binds(i);

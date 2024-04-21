@@ -19,10 +19,9 @@ void main() {
     bloc = BlocMock();
   });
 
-  // tearDown(() {
-  //   bloc.dispose();
-  //   streamController.close();
-  // });
+  tearDown(() {
+    bloc.dispose();
+  });
 
   group('test consumer widget', () {
     testWidgets('Success', (widgetTester) async {
@@ -75,7 +74,7 @@ void main() {
           bloc: bloc,
           builder: (context, state) {
             if (state is ErrorState) {
-              return Text(state.message);
+              return Text(state.message ?? '');
             }
             return Container();
           },
