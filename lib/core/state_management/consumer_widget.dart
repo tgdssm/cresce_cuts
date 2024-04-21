@@ -21,7 +21,7 @@ class _ConsumerWidgetState<T> extends State<ConsumerWidget<T>> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<T>(
-        stream: widget.bloc.state,
+        stream: widget.bloc.stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             widget.listener?.call(context, snapshot.data as T);

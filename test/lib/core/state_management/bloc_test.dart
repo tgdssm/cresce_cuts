@@ -26,7 +26,7 @@ void main() {
       bloc.emit(const ErrorState('Error'));
 
       expectLater(
-        bloc.state,
+        bloc.stream,
         emitsInOrder(
           [
             isA<InitialState>(),

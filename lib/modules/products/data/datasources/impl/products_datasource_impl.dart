@@ -18,12 +18,11 @@ class ProductsDatasourceImpl implements ProductsDatasource {
       for (var product in response.data) {
         products.add(ProductModel.fromJson(product));
       }
-
       return products;
     } on DioException catch (e) {
       throw BaseError(e.message, e.response?.statusCode);
     } catch (e) {
-      throw BaseError(e.toString());
+      throw BaseError('Something went wrong. Try again later.');
     }
   }
 }

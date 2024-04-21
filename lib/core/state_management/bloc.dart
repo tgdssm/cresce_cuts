@@ -2,10 +2,13 @@ import 'dart:async';
 
 abstract class Bloc<T> {
   final StreamController<T> _outputState;
-  Stream<T> get state => _outputState.stream;
+  late T _state;
+  Stream<T> get stream => _outputState.stream;
+  T get state => _state;
 
   Bloc(T initialState) : _outputState = StreamController<T>() {
     emit(initialState);
+    _state = initialState;
     onInit();
   }
 
@@ -14,6 +17,7 @@ abstract class Bloc<T> {
   void emit(T event) {
     if (!_outputState.isClosed) {
       _outputState.sink.add(event);
+      _state = event;
     }
   }
 

@@ -28,7 +28,7 @@ void main() {
       final streamController = StreamController<BaseState>();
 
       streamController.sink.add(const SuccessState<String>('Success'));
-      when(() => bloc.state).thenAnswer((_) => streamController.stream);
+      when(() => bloc.stream).thenAnswer((_) => streamController.stream);
       await widgetTester.pumpWidget(MaterialApp(
         home: ConsumerWidget<BaseState>(
           bloc: bloc,
@@ -48,7 +48,7 @@ void main() {
       final streamController = StreamController<BaseState>();
 
       streamController.sink.add(LoadingState());
-      when(() => bloc.state).thenAnswer((_) => streamController.stream);
+      when(() => bloc.stream).thenAnswer((_) => streamController.stream);
       await widgetTester.pumpWidget(MaterialApp(
         home: ConsumerWidget<BaseState>(
           bloc: bloc,
@@ -68,7 +68,7 @@ void main() {
       final streamController = StreamController<BaseState>();
 
       streamController.sink.add(const ErrorState('Error'));
-      when(() => bloc.state).thenAnswer((_) => streamController.stream);
+      when(() => bloc.stream).thenAnswer((_) => streamController.stream);
       await widgetTester.pumpWidget(MaterialApp(
         home: ConsumerWidget<BaseState>(
           bloc: bloc,
@@ -88,7 +88,7 @@ void main() {
       final streamController = StreamController<BaseState>();
 
       streamController.sink.add(EmptyState());
-      when(() => bloc.state).thenAnswer((_) => streamController.stream);
+      when(() => bloc.stream).thenAnswer((_) => streamController.stream);
       await widgetTester.pumpWidget(MaterialApp(
         home: ConsumerWidget<BaseState>(
           bloc: bloc,
