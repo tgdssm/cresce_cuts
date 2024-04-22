@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:vale_vantagens/core/network/api_client.dart';
-import 'package:vale_vantagens/core/network/api_client_impl.dart';
+import 'package:vale_vantagens/core/network/dio_client_impl.dart';
 import 'package:vale_vantagens/modules/products/products_module.dart';
 
 class AppModule extends Module {
@@ -9,7 +9,7 @@ class AppModule extends Module {
   void binds(Injector i) {
     i.add<Dio>(() => Dio());
     i.add<ApiClient>(
-      () => ApiClientImpl(
+      () => DioClientImpl(
         i.get(),
       ),
     );

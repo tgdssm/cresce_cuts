@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:vale_vantagens/core/network/api_client.dart';
 
-class ApiClientImpl implements ApiClient {
+class DioClientImpl implements ApiClient {
   final Dio _dio;
 
-  ApiClientImpl(this._dio);
+  DioClientImpl(this._dio);
 
   @override
   Future<dynamic> delete(
