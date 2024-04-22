@@ -12,7 +12,10 @@ class SuccessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => const SizedBox(
+        height: 25.0,
+      ),
       itemCount: products.length,
       itemBuilder: (context, index) {
         return ProductCardWidget(
