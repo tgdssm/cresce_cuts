@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/components/product_card_widget.dart';
 
-import '../../../domain/entities/product_entity.dart';
 
 class SuccessWidget extends StatelessWidget {
   final List<ProductEntity> products;

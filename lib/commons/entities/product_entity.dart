@@ -1,4 +1,4 @@
-import 'package:vale_vantagens/modules/products/domain/entities/rating_entity.dart';
+import 'package:vale_vantagens/commons/entities/rating_entity.dart';
 
 class ProductEntity {
   final int id;

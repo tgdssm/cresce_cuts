@@ -5,7 +5,7 @@ import 'package:vale_vantagens/core/errors/base_error.dart';
 import 'package:vale_vantagens/core/network/api_client.dart';
 import 'package:vale_vantagens/modules/products/data/datasources/impl/products_datasource_impl.dart';
 import 'package:vale_vantagens/modules/products/data/datasources/products_datasource.dart';
-import 'package:vale_vantagens/modules/products/data/models/models.dart';
+import 'package:vale_vantagens/commons/models/models.dart';
 
 const payload = <Map<String, dynamic>>[
   {

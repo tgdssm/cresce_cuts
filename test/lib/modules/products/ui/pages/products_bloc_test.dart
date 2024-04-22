@@ -6,7 +6,7 @@ import 'package:vale_vantagens/core/state_management/states/error_state.dart';
 import 'package:vale_vantagens/core/state_management/states/initial_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
 import 'package:vale_vantagens/core/state_management/states/success_state.dart';
-import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
 import 'package:vale_vantagens/modules/products/domain/usecases/get_products_usecase.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/products_bloc.dart';
 

@@ -8,7 +8,7 @@ import 'package:vale_vantagens/core/state_management/states/base_state.dart';
 import 'package:vale_vantagens/core/state_management/states/error_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
 import 'package:vale_vantagens/core/state_management/states/success_state.dart';
-import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/components/loading_widget.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/components/success_widget.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/products_bloc.dart';

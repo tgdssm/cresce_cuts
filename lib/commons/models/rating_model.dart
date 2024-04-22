@@ -1,4 +1,4 @@
-import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
 
 class RatingModel {
   final double rate;

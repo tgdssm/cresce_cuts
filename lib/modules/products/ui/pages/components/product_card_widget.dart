@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:vale_vantagens/core/utils/text_styles.dart';
-import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 
@@ -16,15 +14,19 @@ class ProductCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 220.0,
+      height: 240.0,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          border: Border.all(color: AppColors.silver)),
+        borderRadius: BorderRadius.circular(5.0),
+        border: Border.all(color: AppColors.silver),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 5.0,
+            ),
             child: Row(
               children: [
                 Container(
@@ -108,11 +110,10 @@ class ProductCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 5.0,
-          ),
           const Divider(),
-          Center(
+          Container(
+            alignment: Alignment.center,
+            height: 40.0,
             child: InkWell(
               onTap: () {},
               child: const Text(

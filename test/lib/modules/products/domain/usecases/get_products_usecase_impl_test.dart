@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:vale_vantagens/core/errors/base_error.dart';
 import 'package:vale_vantagens/core/result/result.dart';
-import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
 import 'package:vale_vantagens/modules/products/domain/repositories/products_repository.dart';
 import 'package:vale_vantagens/modules/products/domain/usecases/get_products_usecase.dart';
 import 'package:vale_vantagens/modules/products/domain/usecases/impl/get_products_usecase_impl.dart';

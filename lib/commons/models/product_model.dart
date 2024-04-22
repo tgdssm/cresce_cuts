@@ -1,5 +1,5 @@
-import 'package:vale_vantagens/modules/products/data/models/rating_model.dart';
-import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
+import 'package:vale_vantagens/commons/models/rating_model.dart';
 
 class ProductModel {
   final int id;

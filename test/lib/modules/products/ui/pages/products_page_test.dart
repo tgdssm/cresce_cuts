@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:vale_vantagens/app_module.dart';
 import 'package:vale_vantagens/core/state_management/states/base_state.dart';
 import 'package:vale_vantagens/core/state_management/states/error_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
 import 'package:vale_vantagens/core/state_management/states/success_state.dart';
-import 'package:vale_vantagens/modules/products/domain/entities/entities.dart';
+import 'package:vale_vantagens/commons/entities/entities.dart';
 import 'package:vale_vantagens/modules/products/products_module.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/products_bloc.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/products_page.dart';
@@ -19,6 +20,7 @@ void main() {
   late final ProductsBloc bloc;
   setUpAll(() {
     bloc = BlocMock();
+    Modular.bindModule(AppModule());
     Modular.bindModule(ProductsModule());
     Modular.replaceInstance<ProductsBloc>(bloc);
   });
