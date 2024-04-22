@@ -45,11 +45,15 @@ class _ProductsPageState extends StateManagement<ProductsPage, ProductsBloc> {
                 bloc: bloc,
                 builder: (context, state) {
                   return switch (state) {
-                    LoadingState() => const LoadingWidget(),
+                    LoadingState() => const LoadingWidget(
+                        key: Key('LoadingWidget'),
+                      ),
                     ErrorState() => DefaultError(
+                        key: const Key('DefaultError'),
                         errorText: state.message,
                       ),
                     SuccessState<List<ProductEntity>>() => SuccessWidget(
+                        key: const Key('SuccessWidget'),
                         products: state.data,
                       ),
                     _ => Container(),

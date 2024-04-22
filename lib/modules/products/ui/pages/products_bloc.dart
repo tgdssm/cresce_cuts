@@ -14,8 +14,8 @@ class ProductsBloc extends Bloc<BaseState> {
 
   @override
   void onInit() {
-    getProducts();
     super.onInit();
+    getProducts();
   }
 
   Future<void> getProducts() async {
