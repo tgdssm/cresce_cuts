@@ -26,4 +26,17 @@ class DiscountEntity {
     required this.activationDate,
     this.inactivationDate,
   });
+
+  DiscountModel toModel() => DiscountModel(
+        id: id,
+        name: name,
+        description: description,
+        discountType: discountType,
+        price: price,
+        priceTo: priceTo,
+        discountPercentage: discountPercentage,
+        takeAmount: takeAmount,
+        activationDate: activationDate,
+        inactivationDate: inactivationDate,
+      );
 }
