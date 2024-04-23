@@ -1,7 +1,7 @@
 import '../models/discount_model.dart';
 
 class DiscountEntity {
-  final int id;
+  final String id;
   final String name;
   final String description;
   final DiscountType discountType;

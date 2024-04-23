@@ -7,7 +7,7 @@ import 'package:vale_vantagens/modules/register_discount/data/repositories/regis
 import 'package:vale_vantagens/modules/register_discount/domain/repositories/register_discount_repository.dart';
 
 final model = DiscountModel(
-  id: 1,
+  id: '1',
   name: 'test',
   discountType: DiscountType.price,
   price: 9.99,

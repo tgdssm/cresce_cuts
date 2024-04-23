@@ -30,8 +30,9 @@ class _ProductsPageState extends StateManagement<ProductsPage, ProductsBloc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar(
+      appBar: DefaultAppBar(
         title: 'Produtos',
+        onTapBackButton: () {},
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -64,7 +65,10 @@ class _ProductsPageState extends StateManagement<ProductsPage, ProductsBloc> {
             const SizedBox(
               height: 15.0,
             ),
-            DefaultButton(onPressed: () {}, buttonText: 'Ver descontos'),
+            DefaultButton(
+              onPressed: () {},
+              buttonText: 'Ver descontos',
+            ),
             const SizedBox(
               height: 40.0,
             ),

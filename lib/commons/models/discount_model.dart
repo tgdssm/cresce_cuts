@@ -1,13 +1,23 @@
 import 'package:vale_vantagens/commons/entities/discount_entity.dart';
 
 enum DiscountType {
-  price,
-  percentage,
-  takePay,
+  price('Preço "DE" - Preço "POR"'),
+  percentage('Porcetagem de desconto'),
+  takePay('Leve - Pague');
+
+  const DiscountType(this.name);
+  final String name;
+
+  static DiscountType fromName(String name) {
+    return DiscountType.values.firstWhere(
+      (element) => element.name == name,
+      orElse: () => DiscountType.price,
+    );
+  }
 }
 
 class DiscountModel {
-  final int id;
+  final String id;
   final String name;
   final String description;
   final DiscountType discountType;

@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:vale_vantagens/core/utils/text_styles.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
 
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../register_discount/register_discount_module.dart';
 
 class ProductCardWidget extends StatelessWidget {
   final ProductEntity product;
@@ -93,7 +96,7 @@ class ProductCardWidget extends StatelessWidget {
                                       style: TextStyles.smallMedium,
                                     ),
                                     Text(
-                                      'R\$${product.price.toStringAsFixed(2).replaceAll('.', ',')}',
+                                      NumberFormat.simpleCurrency(locale: "en_US").format(product.price),
                                       style: TextStyles.smallRegular,
                                     ),
                                   ],
@@ -134,7 +137,12 @@ class ProductCardWidget extends StatelessWidget {
             alignment: Alignment.center,
             height: 40.0,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Modular.to.pushNamed(
+                  RegisterDiscountModule.initial.completePath,
+                  arguments: product,
+                );
+              },
               child: const Text(
                 'Adicionar desconto',
                 style: TextStyles.smallMedium,

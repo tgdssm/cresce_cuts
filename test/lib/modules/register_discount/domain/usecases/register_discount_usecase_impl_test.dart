@@ -9,7 +9,7 @@ import 'package:vale_vantagens/modules/register_discount/domain/usecases/impl/re
 import 'package:vale_vantagens/modules/register_discount/domain/usecases/register_discount_usecase.dart';
 
 final entity = DiscountEntity(
-  id: 1,
+  id: '1',
   name: 'test',
   discountType: DiscountType.price,
   price: 9.99,

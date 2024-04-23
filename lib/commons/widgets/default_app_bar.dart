@@ -14,7 +14,9 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(height: 10.0,),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
@@ -65,6 +67,6 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(
-        onTapBackButton != null ? 75.0 : 60.0,
+        onTapBackButton != null ? 85.0 : 60.0,
       );
 }

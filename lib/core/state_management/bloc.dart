@@ -6,9 +6,11 @@ abstract class Bloc<T> {
   Stream<T> get stream => _outputState.stream;
   T get state => _state;
 
-  Bloc(T initialState) : _outputState = StreamController<T>() {
-    emit(initialState);
-    _state = initialState;
+  Bloc([T? initialState]) : _outputState = StreamController<T>() {
+    if (initialState != null) {
+      emit(initialState);
+      _state = initialState;
+    }
     onInit();
   }
 

@@ -10,7 +10,7 @@ import 'package:vale_vantagens/modules/register_discount/data/datasources/regist
 class StorageMock extends Mock implements Storage<DiscountModel> {}
 
 final model = DiscountModel(
-  id: 1,
+  id: '1',
   name: 'test',
   discountType: DiscountType.price,
   price: 9.99,
