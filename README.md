@@ -50,3 +50,7 @@ Se tiver dúvidas durante o desenvolvimento, por favor, entre em contato atravé
 ## Nota
 
 As telas desenvolvidas pelo design foram enviadas para cada candidato conforme tecnologia escolhida no formulário.
+## Pré-requisitos
+Antes de iniciar, você precisará ter as seguintes ferramentas instaladas em seu sistema:
+- [Flutter](https://flutter.dev/docs/get-started/install) (versão 3.19.6)
+- [Android Studio](https://developer.android.com/studio) ou [VS Code](https://code.visualstudio.com/) com o plugin do Flutter instalado
