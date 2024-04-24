@@ -32,7 +32,7 @@ class RegisterDiscountModule extends Module {
   void binds(Injector i) {
     i.add<RegisterDiscountDatasource>(
       () => RegisterDiscountDatasourceImpl(
-        i.get<Storage<Map<String, dynamic>>>(),
+        i.get<Storage<String>>(),
       ),
     );
     i.add<RegisterDiscountRepository>(

@@ -32,9 +32,8 @@ class _ProductsPageState extends StateManagement<ProductsPage, ProductsBloc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar(
+      appBar: const DefaultAppBar(
         title: 'Produtos',
-        onTapBackButton: () {},
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

@@ -13,6 +13,7 @@ final model = DiscountModel(
   price: 9.99,
   description: 'test',
   activationDate: DateTime.now(),
+  image: '',
 );
 
 class RegisterDiscountDatasourceMock extends Mock

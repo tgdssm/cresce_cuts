@@ -1,6 +1,6 @@
 abstract class Storage<T> {
   Future<void> init();
-  Future<List<dynamic>> getAll();
+  Future<List<T>> getAll();
   Future<T?> get({
     required String key,
   });
@@ -11,4 +11,5 @@ abstract class Storage<T> {
   Future<void> delete({
     required String key,
   });
+  Future<void>close();
 }

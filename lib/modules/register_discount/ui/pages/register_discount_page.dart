@@ -35,6 +35,7 @@ class _RegisterDiscountPageState
   final formKey = GlobalKey<FormState>();
 
   late String id;
+  late String image;
   final name = TextEditingController();
   final description = TextEditingController();
   DiscountType type = DiscountType.price;
@@ -58,12 +59,6 @@ class _RegisterDiscountPageState
   }
 
   @override
-  void dispose() {
-    bloc.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(
@@ -73,12 +68,12 @@ class _RegisterDiscountPageState
       body: ConsumerWidget(
         bloc: bloc,
         listener: (context, state) {
-          if(state is SuccessState) {
+          if (state is SuccessState) {
             Modular.to.pop();
           }
         },
         builder: (context, state) {
-          if(state is ErrorState) {
+          if (state is ErrorState) {
             return DefaultError(errorText: state.message);
           }
           return Padding(
@@ -178,7 +173,7 @@ class _RegisterDiscountPageState
                             ),
                             Expanded(
                               child: DefaultTextField(
-                                title: 'Percentual de desconto',
+                                title: 'Percentual',
                                 controller: discountPercentage,
                                 digitsOnly: true,
                               ),
@@ -287,11 +282,14 @@ class _RegisterDiscountPageState
                               id: id,
                               name: name.text,
                               description: description.text,
+                              image: image,
                               discountType: type,
                               price: removeMoneyMask(price.text),
-                              priceTo: removeMoneyMask(price.text),
+                              priceTo: removeMoneyMask(priceTo.text),
                               payAmount: int.tryParse(payAmount.text),
                               takeAmount: int.tryParse(takeAmount.text),
+                              discountPercentage:
+                                  double.tryParse(discountPercentage.text),
                               activationDate: activationDate,
                               inactivationDate: inactivationDate,
                             ),
@@ -314,11 +312,12 @@ class _RegisterDiscountPageState
   }
 
   double removeMoneyMask(String money) {
-    return double.tryParse(money.replaceAll('US\$', '')) ?? 0;
+    return double.tryParse(money.replaceAll('\$', '')) ?? 0;
   }
 
   void setFieldWithDiscount() {
     id = widget.discount!.id;
+    image = widget.discount!.image;
     name.text = widget.discount!.name;
     description.text = widget.discount!.description;
     type = widget.discount!.discountType;
@@ -333,6 +332,7 @@ class _RegisterDiscountPageState
 
   void setFieldWithProduct() {
     id = const Uuid().v4();
+    image = widget.product!.image;
     name.text = widget.product!.title;
     description.text = widget.product!.description;
     price.text = widget.product!.price.toString();

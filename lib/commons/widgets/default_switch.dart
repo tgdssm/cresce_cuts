@@ -26,8 +26,8 @@ class _DefaultSwitchState extends State<DefaultSwitch> {
         alignment: Alignment.centerLeft,
         children: [
           AnimatedContainer(
-            height: 20.0,
-            width: 50.0,
+            height: 15.0,
+            width: 40.0,
             duration: const Duration(milliseconds: 400),
             decoration: BoxDecoration(
               color: value ? AppColors.primaryColor.withOpacity(.5) : AppColors.silver,
@@ -35,13 +35,13 @@ class _DefaultSwitchState extends State<DefaultSwitch> {
             ),
           ),
           SizedBox(
-            width:  50.0,
+            width:  40.0,
             child: AnimatedAlign(
               alignment: value ? Alignment.centerRight : Alignment.centerLeft,
               duration: const Duration(milliseconds: 200),
               child: Container(
-                height: 28.0,
-                width: 28.0,
+                height: 20.0,
+                width: 20.0,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: AppColors.primaryColor,

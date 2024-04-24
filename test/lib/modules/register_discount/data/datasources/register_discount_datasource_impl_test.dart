@@ -7,7 +7,7 @@ import 'package:vale_vantagens/core/storage/storage.dart';
 import 'package:vale_vantagens/modules/register_discount/data/datasources/impl/register_discount_datasource_impl.dart';
 import 'package:vale_vantagens/modules/register_discount/data/datasources/register_discount_datasource.dart';
 
-class StorageMock extends Mock implements Storage<Map<String, dynamic>> {}
+class StorageMock extends Mock implements Storage<String> {}
 
 final model = DiscountModel(
   id: '1',
@@ -16,11 +16,12 @@ final model = DiscountModel(
   price: 9.99,
   description: 'test',
   activationDate: DateTime.now(),
+  image: '',
 );
 
 void main() {
   late RegisterDiscountDatasource datasource;
-  late Storage<Map<String, dynamic>> storage;
+  late Storage<String> storage;
 
   setUpAll(() {
     storage = StorageMock();

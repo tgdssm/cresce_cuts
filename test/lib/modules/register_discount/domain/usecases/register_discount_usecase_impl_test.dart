@@ -15,6 +15,7 @@ final entity = DiscountEntity(
   price: 9.99,
   description: 'test',
   activationDate: DateTime.now(),
+  image: '',
 );
 
 class RegisterDiscountRepositoryMock extends Mock

@@ -5,6 +5,7 @@ class DiscountEntity {
   final String name;
   final String description;
   final DiscountType discountType;
+  final String image;
   final double price;
   final double? priceTo;
   final double? discountPercentage;
@@ -18,6 +19,7 @@ class DiscountEntity {
     required this.name,
     required this.description,
     required this.discountType,
+    required this.image,
     required this.price,
     this.priceTo,
     this.discountPercentage,
@@ -32,6 +34,7 @@ class DiscountEntity {
         name: name,
         description: description,
         discountType: discountType,
+        image: image,
         price: price,
         priceTo: priceTo,
         discountPercentage: discountPercentage,

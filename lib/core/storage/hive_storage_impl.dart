@@ -76,4 +76,15 @@ class HiveStorageImpl<T> implements Storage<T> {
       throw BaseError('Error when opening box');
     }
   }
+
+  @override
+  Future<void> close() async {
+    try {
+      await Hive.close();
+    } on HiveError catch (e) {
+      throw BaseError(e.message);
+    } catch (_) {
+      throw BaseError('Error when closing box');
+    }
+  }
 }
