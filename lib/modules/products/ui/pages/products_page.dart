@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:vale_vantagens/commons/commons.dart';
 import 'package:vale_vantagens/commons/widgets/default_app_bar.dart';
 import 'package:vale_vantagens/commons/widgets/default_error.dart';
@@ -9,6 +10,7 @@ import 'package:vale_vantagens/core/state_management/states/error_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
 import 'package:vale_vantagens/core/state_management/states/success_state.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
+import 'package:vale_vantagens/modules/discounts/discounts_module.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/components/loading_widget.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/components/success_widget.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/products_bloc.dart';
@@ -66,7 +68,9 @@ class _ProductsPageState extends StateManagement<ProductsPage, ProductsBloc> {
               height: 15.0,
             ),
             DefaultButton(
-              onPressed: () {},
+              onPressed: () {
+                Modular.to.pushNamed(DiscountsModule.initial.completePath);
+              },
               buttonText: 'Ver descontos',
             ),
             const SizedBox(

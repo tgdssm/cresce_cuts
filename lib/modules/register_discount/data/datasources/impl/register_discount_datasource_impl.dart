@@ -4,7 +4,7 @@ import 'package:vale_vantagens/core/storage/storage.dart';
 import 'package:vale_vantagens/modules/register_discount/data/datasources/register_discount_datasource.dart';
 
 class RegisterDiscountDatasourceImpl implements RegisterDiscountDatasource {
-  final Storage<DiscountModel> storage;
+  final Storage<Map<String, dynamic>> storage;
   const RegisterDiscountDatasourceImpl(this.storage);
   @override
   Future<void> register(DiscountModel discount) async {
@@ -12,7 +12,7 @@ class RegisterDiscountDatasourceImpl implements RegisterDiscountDatasource {
       await storage.init();
       await storage.put(
         key: discount.id.toString(),
-        value: discount,
+        value: discount.toJson(),
       );
       return;
     } on BaseError catch (_) {

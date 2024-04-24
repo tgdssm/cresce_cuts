@@ -32,8 +32,8 @@ void main() {
   group('test register discount use case', () {
     test('success', () async {
       when(() => repository.register(entity)).thenAnswer(
-        (_) async => Result<BaseError, void>(
-          success: null,
+        (_) async => Result<BaseError, bool>(
+          success: true,
         ),
       );
 
@@ -43,7 +43,7 @@ void main() {
 
     test('error', () async {
       when(() => repository.register(entity)).thenAnswer(
-        (_) async => Result<BaseError, void>(
+        (_) async => Result<BaseError, bool>(
           failure: BaseError('Error'),
         ),
       );

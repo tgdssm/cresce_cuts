@@ -8,10 +8,10 @@ class RegisterDiscountRepositoryImpl implements RegisterDiscountRepository {
   final RegisterDiscountDatasource datasource;
   const RegisterDiscountRepositoryImpl(this.datasource);
   @override
-  Future<Result<BaseError, void>> register(DiscountEntity discount) async {
+  Future<Result<BaseError, bool>> register(DiscountEntity discount) async {
     try {
       await datasource.register(discount.toModel());
-      return Result(success: null);
+      return Result(success: true);
     } on BaseError catch (e) {
       return Result(failure: e);
     }

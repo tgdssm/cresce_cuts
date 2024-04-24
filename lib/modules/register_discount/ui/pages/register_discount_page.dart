@@ -4,9 +4,12 @@ import 'package:uuid/uuid.dart';
 import 'package:vale_vantagens/commons/commons.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
 import 'package:vale_vantagens/commons/widgets/default_app_bar.dart';
+import 'package:vale_vantagens/commons/widgets/default_error.dart';
 import 'package:vale_vantagens/core/state_management/consumer_widget.dart';
 import 'package:vale_vantagens/core/state_management/state_management.dart';
+import 'package:vale_vantagens/core/state_management/states/error_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
+import 'package:vale_vantagens/core/state_management/states/success_state.dart';
 import 'package:vale_vantagens/modules/register_discount/ui/pages/components/default_dropdown.dart';
 import 'package:vale_vantagens/modules/register_discount/ui/pages/components/default_text_field.dart';
 import 'package:vale_vantagens/modules/register_discount/ui/pages/register_discount_bloc.dart';
@@ -69,7 +72,15 @@ class _RegisterDiscountPageState
       ),
       body: ConsumerWidget(
         bloc: bloc,
+        listener: (context, state) {
+          if(state is SuccessState) {
+            Modular.to.pop();
+          }
+        },
         builder: (context, state) {
+          if(state is ErrorState) {
+            return DefaultError(errorText: state.message);
+          }
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: SingleChildScrollView(
@@ -191,10 +202,6 @@ class _RegisterDiscountPageState
                                       if (value == '0') {
                                         return 'Informe um valor';
                                       }
-                                      if ((int.tryParse(value!) ?? 0) >
-                                          (int.tryParse(priceTo.text) ?? 0)) {
-                                        return 'A quantidade deve ser menor que a quantidade paga';
-                                      }
                                       return null;
                                     },
                                   ),
@@ -210,6 +217,11 @@ class _RegisterDiscountPageState
                                     validator: (value) {
                                       if (value == '0') {
                                         return 'Informe um valor';
+                                      }
+                                      if ((int.tryParse(value!) ?? 0) >
+                                          (int.tryParse(takeAmount.text) ??
+                                              0)) {
+                                        return 'A quantidade deve ser menor que a quantidade paga';
                                       }
                                       return null;
                                     },

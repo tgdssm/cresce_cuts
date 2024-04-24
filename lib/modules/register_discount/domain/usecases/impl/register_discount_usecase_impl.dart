@@ -10,7 +10,7 @@ class RegisterDiscountUseCaseImpl implements RegisterDiscountUseCase {
   const RegisterDiscountUseCaseImpl(this.repository);
 
   @override
-  Future<Result<BaseError, void>> call(DiscountEntity discount) async {
+  Future<Result<BaseError, bool>> call(DiscountEntity discount) async {
     return repository.register(discount);
   }
 }

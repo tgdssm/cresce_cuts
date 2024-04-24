@@ -57,8 +57,8 @@ class HiveStorageImpl<T> implements Storage<T> {
       box.put(key, value);
     } on HiveError catch (e) {
       throw BaseError(e.message);
-    } catch (_) {
-      throw BaseError('Error when getting all');
+    } catch (e) {
+      throw BaseError('Error when put');
     }
   }
 
@@ -67,7 +67,9 @@ class HiveStorageImpl<T> implements Storage<T> {
     try {
       final dir = await getApplicationDocumentsDirectory();
       Hive.init(dir.path);
-      await Hive.openBox(boxName);
+      if (!Hive.isBoxOpen(boxName)) {
+        await Hive.openBox<T>(boxName);
+      }
     } on HiveError catch (e) {
       throw BaseError(e.message);
     } catch (_) {

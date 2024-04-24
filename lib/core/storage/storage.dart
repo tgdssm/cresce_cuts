@@ -1,6 +1,6 @@
 abstract class Storage<T> {
   Future<void> init();
-  Future<List<T>> getAll();
+  Future<List<dynamic>> getAll();
   Future<T?> get({
     required String key,
   });

@@ -36,7 +36,7 @@ class RegisterDiscountBloc extends Bloc<BaseState> {
         ErrorState(e.message),
       ),
       (s) => emit(
-        SuccessState<void>(s),
+        const SuccessState<bool>(true),
       ),
     );
   }

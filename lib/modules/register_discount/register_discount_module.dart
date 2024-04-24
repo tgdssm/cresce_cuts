@@ -1,7 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:vale_vantagens/commons/entities/discount_entity.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
-import 'package:vale_vantagens/commons/models/discount_model.dart';
 import 'package:vale_vantagens/core/storage/storage.dart';
 import 'package:vale_vantagens/modules/register_discount/data/datasources/impl/register_discount_datasource_impl.dart';
 import 'package:vale_vantagens/modules/register_discount/data/datasources/register_discount_datasource.dart';
@@ -34,7 +32,7 @@ class RegisterDiscountModule extends Module {
   void binds(Injector i) {
     i.add<RegisterDiscountDatasource>(
       () => RegisterDiscountDatasourceImpl(
-        i.get<Storage<DiscountModel>>(),
+        i.get<Storage<Map<String, dynamic>>>(),
       ),
     );
     i.add<RegisterDiscountRepository>(
