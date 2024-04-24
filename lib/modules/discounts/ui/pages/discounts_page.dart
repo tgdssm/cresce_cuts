@@ -22,7 +22,6 @@ class DiscountsPage extends StatefulWidget {
 
 class _DiscountsPageState
     extends StateManagement<DiscountsPage, DiscountsBloc> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +37,15 @@ class _DiscountsPageState
           bloc: bloc,
           builder: (context, state) {
             return switch (state) {
-              LoadingState() => const DefaultLoadingWidget(),
+              LoadingState() => const DefaultLoadingWidget(
+                  key: Key('DefaultLoadingWidget'),
+                ),
               ErrorState() => DefaultError(
                   key: const Key('DefaultError'),
                   errorText: state.message,
                 ),
               SuccessState<List<DiscountEntity>>() => SuccessWidget(
+                  key: const Key('SuccessWidget'),
                   discounts: state.data,
                 ),
               _ => Container(),

@@ -7,26 +7,27 @@ import 'package:vale_vantagens/core/state_management/states/initial_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
 import 'package:vale_vantagens/core/state_management/states/success_state.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
-import 'package:vale_vantagens/modules/products/domain/usecases/get_products_usecase.dart';
-import 'package:vale_vantagens/modules/products/ui/pages/products_bloc.dart';
+import 'package:vale_vantagens/modules/discounts/domain/usecases/get_discounts_usecase.dart';
+import 'package:vale_vantagens/modules/discounts/ui/pages/discounts_bloc.dart';
 
-class GetProductsUseCaseMock extends Mock implements GetProductsUseCase {}
+class GetDiscountsUseCaseMock extends Mock implements GetDiscountsUseCase {}
 
 void main() {
-  group('Products bloc test', () {
-    late GetProductsUseCase useCase;
+  group('discounts bloc test', () {
+    late GetDiscountsUseCase useCase;
 
     setUp(() {
-      useCase = GetProductsUseCaseMock();
+      useCase = GetDiscountsUseCaseMock();
     });
 
     test('success', () async {
       when(() => useCase()).thenAnswer(
-        (_) async => Result<BaseError, List<ProductEntity>>(
+        (_) async => Result<BaseError, List<DiscountEntity>>(
           success: [],
         ),
       );
-      final bloc = ProductsBloc(useCase);
+
+      final bloc = DiscountsBloc(useCase);
 
       expectLater(
         bloc.stream,
@@ -34,7 +35,7 @@ void main() {
           [
             isA<InitialState>(),
             isA<LoadingState>(),
-            isA<SuccessState<List<ProductEntity>>>(),
+            isA<SuccessState<List<DiscountEntity>>>(),
           ],
         ),
       );
@@ -42,13 +43,11 @@ void main() {
 
     test('error', () async {
       when(() => useCase()).thenAnswer(
-        (_) async => Result<BaseError, List<ProductEntity>>(
-          failure: BaseError('Error'),
+        (_) async => Result<BaseError, List<DiscountEntity>>(
+          failure: BaseError(''),
         ),
       );
-
-      final bloc = ProductsBloc(useCase);
-
+      final bloc = DiscountsBloc(useCase);
 
       expectLater(
         bloc.stream,

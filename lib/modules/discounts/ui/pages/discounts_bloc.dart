@@ -14,8 +14,8 @@ class DiscountsBloc extends Bloc<BaseState> {
 
   @override
   onInit() {
-    super.onInit();
     getDiscounts();
+    super.onInit();
   }
 
   Future<void> getDiscounts() async {

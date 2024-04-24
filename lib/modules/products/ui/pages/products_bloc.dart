@@ -20,8 +20,8 @@ class ProductsBloc extends Bloc<BaseState> {
 
   Future<void> getProducts() async {
     emit(LoadingState());
-    await Future.delayed(const Duration(seconds: 2));
     final result = await getProductsUseCase();
+    await Future.delayed(const Duration(milliseconds: 500));
     result.fold(
       (e) => emit(
         ErrorState(

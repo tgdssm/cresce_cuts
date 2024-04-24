@@ -35,6 +35,7 @@ void main() {
       when(() =>
               storage.put(key: any(named: 'key'), value: any(named: 'value')))
           .thenAnswer((_) async => () {});
+      when(() => storage.close()).thenAnswer((_) async => () {});
 
       expect(
         () async {

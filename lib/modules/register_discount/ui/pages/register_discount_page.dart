@@ -54,10 +54,11 @@ class _RegisterDiscountPageState
   void initState() {
     if (widget.discount != null) {
       setFieldWithDiscount();
-      bloc.updateDiscountType(type);
     } else {
       setFieldWithProduct();
     }
+
+    bloc.updateDiscountType(type);
 
     super.initState();
   }
@@ -86,21 +87,26 @@ class _RegisterDiscountPageState
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
                       child: DefaultTextField(
+                        key: const Key('name'),
                         title: 'Nome do desconto',
                         controller: name,
+                        validator: defaultValidator,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
                       child: DefaultTextField(
+                        key: const Key('description'),
                         title: 'Descrição',
                         controller: description,
                         maxLines: 3,
+                        validator: defaultValidator,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
                       child: DefaultDropdown<String>(
+                        key: const Key('type'),
                         value: type.name,
                         title: 'Tipo do desconto',
                         onChanged: (value) {
@@ -117,11 +123,13 @@ class _RegisterDiscountPageState
                           children: [
                             Expanded(
                               child: DefaultTextField(
+                                key: const Key('priceOf'),
                                 title: 'Preço “DE”',
                                 controller: price,
                                 digitsOnly: true,
                                 isCurrency: true,
                                 validator: (value) {
+                                  defaultValidator(value);
                                   if (value == '\$0.00') {
                                     return 'Informe um valor';
                                   }
@@ -134,11 +142,13 @@ class _RegisterDiscountPageState
                             ),
                             Expanded(
                               child: DefaultTextField(
+                                key: const Key('priceTo'),
                                 title: 'Preço “POR”',
                                 controller: priceTo,
                                 digitsOnly: true,
                                 isCurrency: true,
                                 validator: (value) {
+                                  defaultValidator(value);
                                   if (value == '\$0.00') {
                                     return 'Informe um valor';
                                   }
@@ -156,11 +166,13 @@ class _RegisterDiscountPageState
                           children: [
                             Expanded(
                               child: DefaultTextField(
+                                key: const Key('price'),
                                 title: 'Preço',
                                 controller: price,
                                 digitsOnly: true,
                                 isCurrency: true,
                                 validator: (value) {
+                                  defaultValidator(value);
                                   if (value == '\$0.00') {
                                     return 'Informe um valor';
                                   }
@@ -173,9 +185,11 @@ class _RegisterDiscountPageState
                             ),
                             Expanded(
                               child: DefaultTextField(
+                                key: const Key('percentage'),
                                 title: 'Percentual',
                                 controller: discountPercentage,
                                 digitsOnly: true,
+                                validator: defaultValidator,
                               ),
                             ),
                           ],
@@ -190,10 +204,12 @@ class _RegisterDiscountPageState
                               children: [
                                 Expanded(
                                   child: DefaultTextField(
+                                    key: const Key('take'),
                                     title: 'Leve',
                                     controller: takeAmount,
                                     digitsOnly: true,
                                     validator: (value) {
+                                      defaultValidator(value);
                                       if (value == '0') {
                                         return 'Informe um valor';
                                       }
@@ -206,10 +222,12 @@ class _RegisterDiscountPageState
                                 ),
                                 Expanded(
                                   child: DefaultTextField(
+                                    key: const Key('pay'),
                                     title: 'Pague',
                                     controller: payAmount,
                                     digitsOnly: true,
                                     validator: (value) {
+                                      defaultValidator(value);
                                       if (value == '0') {
                                         return 'Informe um valor';
                                       }
@@ -228,11 +246,13 @@ class _RegisterDiscountPageState
                               height: 20.0,
                             ),
                             DefaultTextField(
+                              key: const Key('product-price'),
                               title: 'Preço',
                               controller: price,
                               digitsOnly: true,
                               isCurrency: true,
                               validator: (value) {
+                                defaultValidator(value);
                                 if (value == '\$0.00') {
                                   return 'Informe um valor';
                                 }
@@ -254,6 +274,7 @@ class _RegisterDiscountPageState
                               onChangedDate: (date) {
                                 activationDate = date;
                               },
+                              validator: defaultValidator,
                             ),
                           ),
                           const SizedBox(
@@ -267,6 +288,7 @@ class _RegisterDiscountPageState
                               onChangedDate: (date) {
                                 inactivationDate = date;
                               },
+                              validator: defaultValidator,
                             ),
                           ),
                         ],
@@ -276,6 +298,7 @@ class _RegisterDiscountPageState
                       height: 20.0,
                     ),
                     DefaultButton(
+                      key: const Key('button'),
                       loading: state is LoadingState,
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -322,15 +345,23 @@ class _RegisterDiscountPageState
     return double.tryParse(money.replaceAll('\$', '')) ?? 0;
   }
 
+  String? defaultValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Preencha o campo';
+    }
+    return null;
+  }
+
   void setFieldWithDiscount() {
     id = widget.discount!.id;
     image = widget.discount!.image;
     name.text = widget.discount!.name;
     description.text = widget.discount!.description;
     type = widget.discount!.discountType;
-    price.text = widget.discount!.price.toString();
-    priceTo.text = widget.discount!.priceTo?.toString() ?? '0';
-    discountPercentage.text = widget.discount!.discountPercentage?.toString() ?? '0';
+    price.text = formatterCurrency(widget.discount!.price);
+    priceTo.text = formatterCurrency(widget.discount!.priceTo ?? 0);
+    discountPercentage.text =
+        widget.discount!.discountPercentage?.toString() ?? '0';
     takeAmount.text = widget.discount!.takeAmount?.toString() ?? '0';
     payAmount.text = widget.discount!.payAmount?.toString() ?? '0';
     activationDate = widget.discount!.activationDate;
@@ -346,6 +377,12 @@ class _RegisterDiscountPageState
     image = widget.product!.image;
     name.text = widget.product!.title;
     description.text = widget.product!.description;
-    price.text = widget.product!.price.toString();
+    price.text = formatterCurrency(widget.product!.price);
+    priceTo.text = formatterCurrency(0);
+  }
+
+  String formatterCurrency(double value) {
+    final formatter = NumberFormat.simpleCurrency(locale: "en_US");
+    return formatter.format(value);
   }
 }
