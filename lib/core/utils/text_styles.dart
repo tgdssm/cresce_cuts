@@ -9,4 +9,9 @@ class TextStyles {
     fontSize: 17.0,
     fontWeight: FontWeight.w700,
   );
+
+  static const titleMedium = TextStyle(
+    fontSize: 20.0,
+    fontWeight: FontWeight.w700,
+  );
 }

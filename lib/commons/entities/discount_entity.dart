@@ -39,6 +39,7 @@ class DiscountEntity {
         priceTo: priceTo,
         discountPercentage: discountPercentage,
         takeAmount: takeAmount,
+        payAmount: payAmount,
         activationDate: activationDate,
         inactivationDate: inactivationDate,
       );

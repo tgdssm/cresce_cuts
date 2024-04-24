@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:vale_vantagens/commons/entities/discount_entity.dart';
 import 'package:vale_vantagens/core/state_management/bloc.dart';
 import 'package:vale_vantagens/core/state_management/states/base_state.dart';
@@ -28,16 +30,22 @@ class RegisterDiscountBloc extends Bloc<BaseState> {
     }
   }
 
-  Future<void> register(DiscountEntity entity) async {
+  Future<void> register(
+    DiscountEntity entity,
+    VoidCallback onSuccess,
+  ) async {
     emit(LoadingState());
     final result = await useCase(entity);
     result.fold(
       (e) => emit(
         ErrorState(e.message),
       ),
-      (s) => emit(
-        const SuccessState<bool>(true),
-      ),
+      (s) {
+        emit(
+          const SuccessState<bool>(true),
+        );
+        onSuccess();
+      },
     );
   }
 }

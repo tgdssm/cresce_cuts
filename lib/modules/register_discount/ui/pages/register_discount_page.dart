@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vale_vantagens/commons/commons.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
@@ -9,7 +10,7 @@ import 'package:vale_vantagens/core/state_management/consumer_widget.dart';
 import 'package:vale_vantagens/core/state_management/state_management.dart';
 import 'package:vale_vantagens/core/state_management/states/error_state.dart';
 import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
-import 'package:vale_vantagens/core/state_management/states/success_state.dart';
+import 'package:vale_vantagens/modules/products/products_module.dart';
 import 'package:vale_vantagens/modules/register_discount/ui/pages/components/default_dropdown.dart';
 import 'package:vale_vantagens/modules/register_discount/ui/pages/components/default_text_field.dart';
 import 'package:vale_vantagens/modules/register_discount/ui/pages/register_discount_bloc.dart';
@@ -44,6 +45,8 @@ class _RegisterDiscountPageState
   final discountPercentage = TextEditingController();
   final takeAmount = TextEditingController();
   final payAmount = TextEditingController();
+  final activationDateController = TextEditingController();
+  final inactivationDateController = TextEditingController();
   DateTime activationDate = DateTime.now();
   DateTime? inactivationDate;
 
@@ -51,6 +54,7 @@ class _RegisterDiscountPageState
   void initState() {
     if (widget.discount != null) {
       setFieldWithDiscount();
+      bloc.updateDiscountType(type);
     } else {
       setFieldWithProduct();
     }
@@ -67,11 +71,6 @@ class _RegisterDiscountPageState
       ),
       body: ConsumerWidget(
         bloc: bloc,
-        listener: (context, state) {
-          if (state is SuccessState) {
-            Modular.to.pop();
-          }
-        },
         builder: (context, state) {
           if (state is ErrorState) {
             return DefaultError(errorText: state.message);
@@ -102,6 +101,7 @@ class _RegisterDiscountPageState
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0),
                       child: DefaultDropdown<String>(
+                        value: type.name,
                         title: 'Tipo do desconto',
                         onChanged: (value) {
                           type = DiscountType.fromName(value ?? '');
@@ -122,7 +122,7 @@ class _RegisterDiscountPageState
                                 digitsOnly: true,
                                 isCurrency: true,
                                 validator: (value) {
-                                  if (value == 'R\$0,00') {
+                                  if (value == '\$0.00') {
                                     return 'Informe um valor';
                                   }
                                   return null;
@@ -139,7 +139,7 @@ class _RegisterDiscountPageState
                                 digitsOnly: true,
                                 isCurrency: true,
                                 validator: (value) {
-                                  if (value == 'R\$0,00') {
+                                  if (value == '\$0.00') {
                                     return 'Informe um valor';
                                   }
                                   return null;
@@ -161,7 +161,7 @@ class _RegisterDiscountPageState
                                 digitsOnly: true,
                                 isCurrency: true,
                                 validator: (value) {
-                                  if (value == 'R\$0,00') {
+                                  if (value == '\$0.00') {
                                     return 'Informe um valor';
                                   }
                                   return null;
@@ -233,7 +233,7 @@ class _RegisterDiscountPageState
                               digitsOnly: true,
                               isCurrency: true,
                               validator: (value) {
-                                if (value == 'R\$0,00') {
+                                if (value == '\$0.00') {
                                   return 'Informe um valor';
                                 }
                                 return null;
@@ -249,6 +249,7 @@ class _RegisterDiscountPageState
                           Expanded(
                             child: DefaultTextField(
                               title: 'Data ativação',
+                              controller: activationDateController,
                               isDatePicker: true,
                               onChangedDate: (date) {
                                 activationDate = date;
@@ -261,6 +262,7 @@ class _RegisterDiscountPageState
                           Expanded(
                             child: DefaultTextField(
                               title: 'Data inativação',
+                              controller: inactivationDateController,
                               isDatePicker: true,
                               onChangedDate: (date) {
                                 inactivationDate = date;
@@ -275,9 +277,9 @@ class _RegisterDiscountPageState
                     ),
                     DefaultButton(
                       loading: state is LoadingState,
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
-                          bloc.register(
+                          await bloc.register(
                             DiscountEntity(
                               id: id,
                               name: name.text,
@@ -292,6 +294,11 @@ class _RegisterDiscountPageState
                                   double.tryParse(discountPercentage.text),
                               activationDate: activationDate,
                               inactivationDate: inactivationDate,
+                            ),
+                            () => Modular.to.popUntil(
+                              ModalRoute.withName(
+                                ProductsModule.root.completePath,
+                              ),
                             ),
                           );
                         }
@@ -322,12 +329,16 @@ class _RegisterDiscountPageState
     description.text = widget.discount!.description;
     type = widget.discount!.discountType;
     price.text = widget.discount!.price.toString();
-    priceTo.text = widget.discount!.priceTo.toString();
-    discountPercentage.text = widget.discount!.discountPercentage.toString();
-    takeAmount.text = widget.discount!.takeAmount.toString();
-    payAmount.text = widget.discount!.payAmount.toString();
+    priceTo.text = widget.discount!.priceTo?.toString() ?? '0';
+    discountPercentage.text = widget.discount!.discountPercentage?.toString() ?? '0';
+    takeAmount.text = widget.discount!.takeAmount?.toString() ?? '0';
+    payAmount.text = widget.discount!.payAmount?.toString() ?? '0';
     activationDate = widget.discount!.activationDate;
     inactivationDate = widget.discount!.inactivationDate;
+    activationDateController.text =
+        DateFormat('dd/MM/yyyy').format(widget.discount!.activationDate);
+    inactivationDateController.text =
+        DateFormat('dd/MM/yyyy').format(widget.discount!.inactivationDate!);
   }
 
   void setFieldWithProduct() {

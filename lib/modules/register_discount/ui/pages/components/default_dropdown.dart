@@ -7,11 +7,13 @@ class DefaultDropdown<T> extends StatefulWidget {
   final List<T> items;
   final ValueChanged<T?>? onChanged;
   final String title;
+  final T? value;
   const DefaultDropdown({
     super.key,
     required this.onChanged,
     required this.items,
     required this.title,
+    this.value,
   });
 
   @override
@@ -32,6 +34,7 @@ class _DefaultDropdownState<T> extends State<DefaultDropdown<T>> {
           height: 8.0,
         ),
         DropdownButtonFormField<T>(
+          value: widget.value,
           focusColor: AppColors.white,
           decoration: InputDecoration(
             border: border,

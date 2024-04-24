@@ -78,8 +78,7 @@ class DefaultTextField extends StatelessWidget {
                   if (pickedDate != null) {
                     String formattedDate =
                         DateFormat('dd/MM/yyyy').format(pickedDate);
-                    ctrl.text =
-                        formattedDate;
+                    ctrl.text = formattedDate;
                     onChangedDate?.call(pickedDate);
                   }
                 }

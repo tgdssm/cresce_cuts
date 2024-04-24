@@ -3,10 +3,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:vale_vantagens/commons/commons.dart';
 import 'package:vale_vantagens/core/utils/text_styles.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
+import 'package:vale_vantagens/modules/discount_detail/discount_detail_module.dart';
 import 'package:vale_vantagens/modules/discounts/ui/pages/components/tile_date_discount_widget.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../register_discount/register_discount_module.dart';
 
 class DiscountCardWidget extends StatelessWidget {
   final DiscountEntity discount;
@@ -128,7 +128,7 @@ class DiscountCardWidget extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 Modular.to.pushNamed(
-                  RegisterDiscountModule.initial.completePath,
+                  DiscountDetailModule.initial.completePath,
                   arguments: discount,
                 );
               },
