@@ -4,10 +4,10 @@ import 'package:vale_vantagens/commons/entities/discount_entity.dart';
 import 'package:vale_vantagens/commons/widgets/default_app_bar.dart';
 import 'package:vale_vantagens/core/state_management/consumer_widget.dart';
 import 'package:vale_vantagens/core/state_management/state_management.dart';
-import 'package:vale_vantagens/modules/discounts/ui/pages/components/loading_widget.dart';
 import 'package:vale_vantagens/modules/discounts/ui/pages/components/success_widget.dart';
 
 import '../../../../commons/widgets/default_error.dart';
+import '../../../../commons/widgets/loading_widget.dart';
 import '../../../../core/state_management/states/error_state.dart';
 import '../../../../core/state_management/states/loading_state.dart';
 import '../../../../core/state_management/states/success_state.dart';
@@ -38,7 +38,7 @@ class _DiscountsPageState
           bloc: bloc,
           builder: (context, state) {
             return switch (state) {
-              LoadingState() => const LoadingWidget(),
+              LoadingState() => const DefaultLoadingWidget(),
               ErrorState() => DefaultError(
                   key: const Key('DefaultError'),
                   errorText: state.message,

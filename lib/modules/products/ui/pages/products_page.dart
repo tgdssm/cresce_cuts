@@ -11,7 +11,7 @@ import 'package:vale_vantagens/core/state_management/states/loading_state.dart';
 import 'package:vale_vantagens/core/state_management/states/success_state.dart';
 import 'package:vale_vantagens/commons/entities/entities.dart';
 import 'package:vale_vantagens/modules/discounts/discounts_module.dart';
-import 'package:vale_vantagens/modules/products/ui/pages/components/loading_widget.dart';
+import 'package:vale_vantagens/commons/widgets/loading_widget.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/components/success_widget.dart';
 import 'package:vale_vantagens/modules/products/ui/pages/products_bloc.dart';
 
@@ -47,7 +47,7 @@ class _ProductsPageState extends StateManagement<ProductsPage, ProductsBloc> {
                 bloc: bloc,
                 builder: (context, state) {
                   return switch (state) {
-                    LoadingState() => const LoadingWidget(
+                    LoadingState() => const DefaultLoadingWidget(
                         key: Key('LoadingWidget'),
                       ),
                     ErrorState() => DefaultError(

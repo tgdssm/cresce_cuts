@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:vale_vantagens/commons/widgets/shimmer.dart';
 import 'package:vale_vantagens/core/utils/app_colors.dart';
 
-class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({super.key});
+class DefaultLoadingWidget extends StatelessWidget {
+  const DefaultLoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

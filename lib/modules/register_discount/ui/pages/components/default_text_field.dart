@@ -57,12 +57,7 @@ class DefaultTextField extends StatelessWidget {
           maxLines: maxLines,
           keyboardType: digitsOnly ? TextInputType.number : TextInputType.text,
           inputFormatters: inputFormatters(),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Preencha o campo';
-            }
-            return validator?.call(value);
-          },
+          validator: validator,
           decoration: InputDecoration(
             border: border,
             focusedBorder: border,
