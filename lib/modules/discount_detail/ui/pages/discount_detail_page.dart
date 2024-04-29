@@ -156,8 +156,10 @@ class DiscountDetailPage extends StatelessWidget {
 
   String saved() {
     return switch (discount.discountType) {
-      DiscountType.price => 'Economize ${formatCurrency(calcDiscount())}',
-      DiscountType.percentage => '${calcDiscount().toInt()}% Desconto',
+      DiscountType.price =>
+        'Economize ${formatCurrency(discount.price - calcDiscount())}',
+      DiscountType.percentage =>
+        '${discount.discountPercentage?.toInt()}% Desconto',
       DiscountType.takePay =>
         'Leve ${discount.takeAmount} Pague ${discount.payAmount}',
     };
@@ -166,7 +168,7 @@ class DiscountDetailPage extends StatelessWidget {
   double calcDiscount() {
     double result = discount.price;
     if (discount.discountType == DiscountType.price) {
-      result = discount.price - discount.priceTo!;
+      result = discount.priceTo!;
     }
 
     if (discount.discountType == DiscountType.percentage) {

@@ -96,8 +96,11 @@ class ProductCardWidget extends StatelessWidget {
                                       style: TextStyles.smallMedium,
                                     ),
                                     Text(
-                                      NumberFormat.simpleCurrency(locale: "en_US").format(product.price),
+                                      NumberFormat.simpleCurrency(
+                                              locale: "en_US")
+                                          .format(product.price),
                                       style: TextStyles.smallRegular,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),
@@ -112,6 +115,7 @@ class ProductCardWidget extends StatelessWidget {
                                     const Text(
                                       'Categoria',
                                       style: TextStyles.smallMedium,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                     Text(
                                       product.category,
